@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author shiki
  * @date 2019/11/6 - 21:08
  */
-public class MyLinkedList<E> implements IList<E> {
+public class MyArrayList<E> implements IList<E> {
 
     private int size;
 
@@ -18,12 +18,12 @@ public class MyLinkedList<E> implements IList<E> {
 
     private final static int DEFAULT_SIZE = 10;
 
-    public MyLinkedList(){
+    public MyArrayList(){
         ELEMENT_DATA = EMPTY_ELEMENT_DATA;
     }
 
     @Override
-    public void add(E... e) {
+    public void add(E e) {
         checkCapacity(size+1);
         ELEMENT_DATA[size++] = e;
     }
@@ -40,12 +40,13 @@ public class MyLinkedList<E> implements IList<E> {
                     // 如果删除的不是最后一位
                     ELEMENT_DATA[i] = null;
                     // 删除相匹配的第一个元素
-                    if (i != this.size){
+                    if (i != this.size-1){
                         // 索引i之后的所有元素左移一位
-                        for (int j = i+1; j < this.size; j++) {
-                            ELEMENT_DATA[i] = ELEMENT_DATA[i+1];
+                        for (int j = i; j < this.size; j++) {
+                            ELEMENT_DATA[j] = ELEMENT_DATA[j+1];
                         }
                     }
+                    break;
 
                 }
             }
