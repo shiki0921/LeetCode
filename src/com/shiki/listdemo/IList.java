@@ -6,7 +6,7 @@ package com.shiki.listdemo;
  */
 public interface IList<E> {
 
-    public void add(E... e);
+    public void add(E e);
 
     public E remove(E e);
 
