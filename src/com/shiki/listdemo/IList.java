@@ -12,5 +12,5 @@ public interface IList<E> {
 
     public int size();
 
-    public E get(int index);
+    public E get(int index) throws Exception;
 }
