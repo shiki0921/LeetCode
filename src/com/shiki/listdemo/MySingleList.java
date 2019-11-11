@@ -37,7 +37,7 @@ public class MySingleList<E> implements IList<E> {
         //首先遍历链表找到需要删除的元素
         for(Node<E> x = first;x != null;x = x.next){
             //找到需要删除的元素的前趋节点
-            if (x.next != null&&x.next == e){
+            if (x.next != null&&x.next.e == e){
                 temp = x;
                 target = x.next;
                 //将前趋节点的下一节点指向被删除节点的下一节点
