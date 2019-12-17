@@ -1,35 +1,90 @@
 package com.shiki.listdemo;
 
+/**
+ * 双端队列实现List
+ * @param <E>
+ */
 public class MyDequeList<E> implements IList<E> {
-    @Override
-    public void add(Object o) {
 
+    private int size;
+
+    private Node<E> head,tail;
+
+    public MyDequeList(){super();};
+
+    @Override
+    public void add(E e) {
+        Node<E> node = new Node<E>(e);
+
+        if (this.head == null){
+            this.head = node;
+            this.tail = this.head;
+        }else{
+            this.tail.next = node;
+            node.prev = this.tail;
+            this.tail = node;
+        }
+        size++;
     }
 
     @Override
-    public Object remove(Object o) {
+    public E remove(E e) {
+        //空队列
+        if (this.head == null){
+            return null;
+        }
+
+        //从头结点开始遍历
+        for(Node<E> current = this.head;current != null;current = current.next){
+            if (e.equals(current.val)){
+                //如果是头结点
+                if (current.prev == null){
+                    this.head = current.next;
+                }else{
+                    current.prev.next = current.next;
+                }
+
+                if (current.next != null){
+                    current.next.prev = current.prev;
+                }else{
+                    this.tail = current.prev;
+                }
+
+            }
+            this.size--;
+            return e;
+        }
         return null;
     }
 
     @Override
     public int size() {
-        return 0;
+        return this.size;
     }
 
     @Override
     public E get(int index) throws Exception {
-        return null;
+        if (index > this.size){
+            throw new IndexOutOfBoundsException();
+        }
+
+        //从头结点开始遍历
+        Node<E> current = this.head;
+        int i = 0;
+        while(i < index){
+            current = current.next;
+            i++;
+        }
+
+        return current.val;
     }
 
     class Node<E>{
         E val;
-        Node<E> prev;
-        Node<E> next;
+        Node<E> prev,next;
 
-        public Node(E val,Node<E> prev,Node<E> next){
+        public Node(E val){
             this.val = val;
-            this.prev = prev;
-            this.next = next;
         }
     }
 }
