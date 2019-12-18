@@ -36,7 +36,7 @@ public class MyDequeList<E> implements IList<E> {
 
         //从头结点开始遍历
         for(Node<E> current = this.head;current != null;current = current.next){
-            if (e.equals(current.val)){
+            if (checkVal(e,current.val)){
                 //如果是头结点
                 if (current.prev == null){
                     this.head = current.next;
@@ -50,9 +50,9 @@ public class MyDequeList<E> implements IList<E> {
                     this.tail = current.prev;
                 }
 
+                this.size--;
+                return e;
             }
-            this.size--;
-            return e;
         }
         return null;
     }
@@ -77,6 +77,10 @@ public class MyDequeList<E> implements IList<E> {
         }
 
         return current.val;
+    }
+
+    private boolean checkVal(E target,E val){
+        return target == null ? false : target.equals(val);
     }
 
     class Node<E>{
